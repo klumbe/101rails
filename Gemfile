@@ -113,3 +113,6 @@ gem 'flamegraph'
 gem 'stackprof'
 gem 'memory_profiler'
 gem 'rack-mini-profiler'
+
+# structure validation with template-pages
+gem 'wiki_validator', git: 'https://github.com/klumbe/wiki_validator'

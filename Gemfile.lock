@@ -18,6 +18,12 @@ GIT
       rinku
 
 GIT
+  remote: https://github.com/klumbe/wiki_validator
+  revision: dbe8ff6152d7552d5ac8ac72b5125542ad235998
+  specs:
+    wiki_validator (0.2.0)
+
+GIT
   remote: https://github.com/kschiess/parslet.git
   revision: 46bc703db3dd4ed21a75af1fc90bf685fe293759
   specs:
@@ -539,6 +545,7 @@ DEPENDENCIES
   uglifier
   validate_url
   wicked_pdf
+  wiki_validator!
   wikicloth!
   wkhtmltopdf-binary
 
@@ -546,4 +553,4 @@ RUBY VERSION
    ruby 2.4.2p198
 
 BUNDLED WITH
-   1.16.0.pre.3
+   1.16.1
