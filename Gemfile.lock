@@ -19,9 +19,9 @@ GIT
 
 GIT
   remote: https://github.com/klumbe/wiki_validator
-  revision: dbe8ff6152d7552d5ac8ac72b5125542ad235998
+  revision: ecd96c889de0541416fd59d9f82b1036ced4534c
   specs:
-    wiki_validator (0.2.0)
+    wiki_validator (0.3.5)
 
 GIT
   remote: https://github.com/kschiess/parslet.git
@@ -128,12 +128,12 @@ GEM
     ebnf (1.0.2)
       rdf (~> 2.0)
       sxp (~> 1.0)
-    elasticsearch (5.0.4)
-      elasticsearch-api (= 5.0.4)
-      elasticsearch-transport (= 5.0.4)
-    elasticsearch-api (5.0.4)
+    elasticsearch (6.0.0)
+      elasticsearch-api (= 6.0.0)
+      elasticsearch-transport (= 6.0.0)
+    elasticsearch-api (6.0.0)
       multi_json
-    elasticsearch-transport (5.0.4)
+    elasticsearch-transport (6.0.0)
       faraday
       multi_json
     equivalent-xml (0.6.0)
@@ -168,13 +168,14 @@ GEM
     hamster (3.0.0)
       concurrent-ruby (~> 1.0)
     hashdiff (0.3.1)
-    hashie (3.4.6)
+    hashie (3.5.7)
     hightop (0.1.4)
       activerecord
     html2text (0.2.0)
       nokogiri (~> 1.6)
     htmlentities (4.3.4)
-    i18n (0.8.4)
+    i18n (0.9.1)
+      concurrent-ruby (~> 1.0)
     ionicons-rails (2.0.0)
     jbuilder (2.6.0)
       activesupport (>= 3.0.0, < 5.1)
@@ -229,10 +230,10 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
     mini_portile2 (2.2.0)
-    minitest (5.10.2)
+    minitest (5.11.1)
     momentjs-rails (2.15.1)
       railties (>= 3.1)
-    multi_json (1.12.1)
+    multi_json (1.13.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
     net-http-persistent (2.9.4)
@@ -414,7 +415,7 @@ GEM
     scenic (1.4.0)
       activerecord (>= 4.0.0)
       railties (>= 4.0.0)
-    searchkick (2.3.2)
+    searchkick (2.4.0)
       activemodel (>= 4.1)
       elasticsearch (>= 1)
       hashie
@@ -459,7 +460,7 @@ GEM
     turbolinks-source (5.0.0)
     typhoeus (1.3.0)
       ethon (>= 0.9.0)
-    tzinfo (1.2.3)
+    tzinfo (1.2.4)
       thread_safe (~> 0.1)
     uglifier (3.0.3)
       execjs (>= 0.3.0, < 3)

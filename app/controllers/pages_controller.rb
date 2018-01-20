@@ -9,7 +9,7 @@ class PagesController < ApplicationController
 
   # before_filter need to be before load_and_authorize_resource
   # methods, that need to check permissions
-  before_action :get_the_page, only: [:edit, :rename, :update, :update_repo, :destroy]
+  before_action :get_the_page, only: [:edit, :rename, :update, :update_repo, :destroy, :validate]
   authorize_resource only: [:delete, :rename, :update, :apply_findings, :update_repo, :render_script]
 
   def get_the_page
@@ -214,6 +214,20 @@ class PagesController < ApplicationController
 
       failure(:contributor_page_created) do |result|
         redirect_to page_path(result[:full_title])
+      end
+    end
+  end
+
+  # get :full_title/validate
+  def validate
+    @validation_status_list = GetValidationStatusForPage.run(page: @page).value[:status]
+
+    respond_to do |format|
+      format.html do
+        render :validate
+      end
+      format.json do
+        render json: @validation_status_list.to_json
       end
     end
   end

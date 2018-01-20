@@ -1,0 +1,19 @@
+<h1><%= @page.full_title %></h1>
+<% @validation_status_list.each do |status| %>
+  <div>
+    <table>
+      <tr>
+        <td>Template:</td><td><%= status.template_name %></td>
+      </tr>
+      <tr>
+        <td>Page:</td><td><%= status.page_name%></td>
+      </tr>
+      <tr>
+        <td>Status:</td><td><%= status.valid? ? 'valid' : 'invalid' %></td>
+      </tr>
+      <tr>
+        <td>Errors:</td><td><%= status.errors.to_s %></td>
+      </tr>
+    </table>
+  </div>
+<% end %>
