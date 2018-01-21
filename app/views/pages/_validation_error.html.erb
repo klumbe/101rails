@@ -1,0 +1,30 @@
+<% index = validation_error_counter + 1 %>
+<% error_id = "#{parent_id}_#{index}" %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h5 class="panel-title">
+      <a data-toggle="collapse" data-parent="#<%= parent_id %>" href="#<%= error_id %>">
+        <div class="validation_error_message">
+          <%= validation_error.message %>
+        </div>
+        <% if validation_error.location != -1 %>
+        <div class="validation_error_location">
+          <%= validation_error.location %>
+        </div>
+        <% end %>
+      </a>
+    </h5>
+  </div>
+  <div id="<%= error_id %>" class="panel-collapse collapse">
+    <% if !validation_error.suberrors.empty? %>
+    <div class="panel-body">
+
+      <% suberror_id = error_id + "_accordion" %>
+      <div class="panel-group" id="<%= suberror_id %>">
+        <%= render partial: 'validation_error', collection: validation_error.suberrors %>
+      </div>
+
+    </div>
+    <% end %>
+  </div>
+</div>

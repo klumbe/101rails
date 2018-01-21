@@ -1,19 +1,21 @@
+<% valid = @validation_status_list.select {|s| !s.valid?}.empty? %>
 <h1><%= @page.full_title %></h1>
-<% @validation_status_list.each do |status| %>
-  <div>
-    <table>
-      <tr>
-        <td>Template:</td><td><%= status.template_name %></td>
-      </tr>
-      <tr>
-        <td>Page:</td><td><%= status.page_name%></td>
-      </tr>
-      <tr>
-        <td>Status:</td><td><%= status.valid? ? 'valid' : 'invalid' %></td>
-      </tr>
-      <tr>
-        <td>Errors:</td><td><%= status.errors.to_s %></td>
-      </tr>
-    </table>
+<div class="panel-group" id="validation_accordion">
+  <% panel_class = valid ? 'panel-success' : 'panel-danger' %>
+  <div class="panel <%= panel_class %>">
+    <div class="panel-heading" id="validation_heading">
+      <h5 class="panel-title">
+        <a data-toggle="collapse" data-parent="#validation_accordion" href="#validation_status_list">
+          <%= valid ? 'The page is valid.' : 'Validation errors have been found.' %>
+        </a>
+      </h5>
+    </div>
+    <div id="validation_status_list" class="panel-collapse collapse">
+      <div class="panel-body">
+        <div class="panel-group" id="validation_status_accordion">
+          <%= render partial: 'validation_status', collection: @validation_status_list %>
+        </div>
+      </div>
+    </div>
   </div>
-<% end %>
+</div>

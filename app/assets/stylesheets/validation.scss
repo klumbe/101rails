@@ -1,0 +1,12 @@
+#validation_accordion{
+  .panel-heading{
+    overflow: hidden;
+  }
+  .template_name, .validation_error_message{
+    float: left;
+  }
+  .template_status, .validation_error_location{
+    float: right;
+  }
+
+}

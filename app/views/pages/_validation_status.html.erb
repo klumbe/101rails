@@ -1,0 +1,27 @@
+<% valid = validation_status.valid? %>
+<% template_id = validation_status.template_name.split(':').last %>
+<% panel_class = valid ? 'panel-success' : 'panel-danger' %>
+<div class="panel <%= panel_class %>">
+  <div class="panel-heading" id="<%= template_id%>">
+    <h5 class="panel-title">
+      <a data-toggle="collapse" data-parent="#validation_status_accordion" href="#<%= template_id %>_status">
+        <div class="template_name">
+          <%= validation_status.template_name%>
+        </div>
+        <div class="template_status">
+          <%= validation_status.valid? ? 'valid' : 'invalid' %>
+        </div>
+      </a>
+    </h5>
+  </div>
+  <div id="<%= template_id %>_status" class="panel-collapse collapse">
+    <% if !valid %>
+    <div class="panel-body">
+      <% parent_id = template_id +'_validation_error' %>
+      <div class="panel-group" id="<%= parent_id %>">
+          <%= render partial: 'validation_error', collection: validation_status.errors, locals: {parent_id: parent_id} %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
