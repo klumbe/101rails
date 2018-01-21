@@ -4,14 +4,18 @@
 <div class="panel <%= panel_class %>">
   <div class="panel-heading" id="<%= template_id%>">
     <h5 class="panel-title">
+      <% if !valid %>
       <a data-toggle="collapse" data-parent="#validation_status_accordion" href="#<%= template_id %>_status">
+      <% end %>
         <div class="template_name">
           <%= validation_status.template_name%>
         </div>
         <div class="template_status">
           <%= validation_status.valid? ? 'valid' : 'invalid' %>
         </div>
+      <% if !valid %>
       </a>
+      <% end %>
     </h5>
   </div>
   <div id="<%= template_id %>_status" class="panel-collapse collapse">

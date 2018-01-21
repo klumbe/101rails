@@ -3,7 +3,9 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <h5 class="panel-title">
+      <% if !validation_error.suberrors.empty? %>
       <a data-toggle="collapse" data-parent="#<%= parent_id %>" href="#<%= error_id %>">
+      <% end %>
         <div class="validation_error_message">
           <%= validation_error.message %>
         </div>
@@ -12,7 +14,9 @@
           <%= validation_error.location %>
         </div>
         <% end %>
+      <% if !validation_error.suberrors.empty? %>
       </a>
+      <% end %>
     </h5>
   </div>
   <div id="<%= error_id %>" class="panel-collapse collapse">

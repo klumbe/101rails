@@ -1,5 +1,6 @@
 <% valid = @validation_status_list.select {|s| !s.valid?}.empty? %>
 <h1><%= @page.full_title %></h1>
+<h2>Validation report</h2>
 <div class="panel-group" id="validation_accordion">
   <% panel_class = valid ? 'panel-success' : 'panel-danger' %>
   <div class="panel <%= panel_class %>">
