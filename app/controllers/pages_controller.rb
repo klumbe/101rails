@@ -10,6 +10,7 @@ class PagesController < ApplicationController
   # before_filter need to be before load_and_authorize_resource
   # methods, that need to check permissions
   before_action :get_the_page, only: [:edit, :rename, :update, :update_repo, :destroy, :validate]
+  before_action :get_validation_result, only: [:validate]
   authorize_resource only: [:delete, :rename, :update, :apply_findings, :update_repo, :render_script]
 
   def get_the_page
@@ -59,6 +60,14 @@ class PagesController < ApplicationController
     end
 
     @books = []
+  end
+
+  def get_validation_result
+    if @page.nil?
+      @validation_status_list = []
+    else
+      @validation_status_list = GetValidationStatusForPage.run(page: @page).value[:status]
+    end
   end
 
   def index
@@ -197,6 +206,7 @@ class PagesController < ApplicationController
         @contributions  = result[:contributions]
         @errors         = result[:errors]
         @warnings       = result[:warnings]
+        get_validation_result()
       end
 
       failure(:page_not_found) do |result|
@@ -220,7 +230,6 @@ class PagesController < ApplicationController
 
   # get :full_title/validate
   def validate
-    @validation_status_list = GetValidationStatusForPage.run(page: @page).value[:status]
 
     respond_to do |format|
       format.html do
