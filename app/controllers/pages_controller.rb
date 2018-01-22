@@ -146,6 +146,8 @@ class PagesController < ApplicationController
     full_title = params[:id]
     page = PageModule.create_page_by_full_title(full_title)
     if page
+      GetInitialPageContent.run(page: page)
+      page.save
       redirect_to page_path(full_title) and return
     else
       flash[:error] = "You cannot create new page #{full_title}"
