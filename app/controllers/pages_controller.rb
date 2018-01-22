@@ -224,7 +224,7 @@ class PagesController < ApplicationController
 
     respond_to do |format|
       format.html do
-        render :validate
+        render :validation_report
       end
       format.json do
         render json: @validation_status_list.to_json

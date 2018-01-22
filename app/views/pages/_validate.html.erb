@@ -1,6 +1,4 @@
-<% valid = @validation_status_list.select {|s| !s.valid?}.empty? %>
-<h1><%= @page.full_title %></h1>
-<h2>Validation report</h2>
+<% valid = ((@validation_status_list.select {|s| !s.valid?}.empty?) && !@validation_status_list.empty?) %>
 <div class="panel-group" id="validation_accordion">
   <% panel_class = valid ? 'panel-success' : 'panel-danger' %>
   <div class="panel <%= panel_class %>">
@@ -13,9 +11,13 @@
     </div>
     <div id="validation_status_list" class="panel-collapse collapse">
       <div class="panel-body">
+        <% if @validation_status_list.empty? %>
+        No template has been applied.
+        <% else %>
         <div class="panel-group" id="validation_status_accordion">
           <%= render partial: 'validation_status', collection: @validation_status_list %>
         </div>
+        <% end %>
       </div>
     </div>
   </div>
