@@ -6,6 +6,9 @@
       <% if !validation_error.suberrors.empty? %>
       <a data-toggle="collapse" data-parent="#<%= @parent_id %>" href="#<%= error_id %>">
       <% end %>
+        <div class="validation_error_template_location">
+          #<%= validation_error.template_location %>
+        </div>
         <div class="validation_error_message">
           <%= validation_error.message %>
         </div>
