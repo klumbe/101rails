@@ -21,11 +21,12 @@
   <div id="<%= template_id %>_status" class="panel-collapse collapse">
     <% if !valid %>
     <div class="panel-body">
-      <% @parent_id = template_id +'_validation_error' %>
+      <% parent_id = template_id +'_validation_error' %>
       <div class="panel-group" id="<%= @parent_id %>">
           <%= render partial: 'validation_error',
                      collection: validation_status.errors,
-                     as: :validation_error %>
+                     as: :validation_error,
+                     locals: { pid: parent_id } %>
       </div>
     </div>
     <% end %>
