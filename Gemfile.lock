@@ -19,9 +19,9 @@ GIT
 
 GIT
   remote: https://github.com/klumbe/wiki_validator
-  revision: beed5f68b1a0c22376335be3196c6607b18607a7
+  revision: cb8111c671e2047ac18c1144f23faa724d16a543
   specs:
-    wiki_validator (0.3.8)
+    wiki_validator (0.3.9)
 
 GIT
   remote: https://github.com/kschiess/parslet.git
