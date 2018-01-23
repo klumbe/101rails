@@ -236,6 +236,8 @@ class PagesController < ApplicationController
 
   # get :full_title/validate
   def validate
+    # unfolds the top accordion-view
+    @unfolded = true
 
     respond_to do |format|
       format.html do
