@@ -1,4 +1,4 @@
-class GetInitialPageContent
+class GenerateInitialPageContent
   include SolidUseCase
   steps(
     GetValidationStatusForPage,

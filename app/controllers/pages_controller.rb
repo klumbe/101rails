@@ -63,10 +63,12 @@ class PagesController < ApplicationController
   end
 
   def get_validation_result
-    if @page.nil?
+    if @page.nil? || @page.namespace == 'Template'
       @validation_status_list = []
+      @valid = false
     else
       @validation_status_list = GetValidationStatusForPage.run(page: @page).value[:status]
+      @valid = ((@validation_status_list.select {|s| !s.valid?}.empty?) && !@validation_status_list.empty?)
     end
   end
 
@@ -146,7 +148,7 @@ class PagesController < ApplicationController
     full_title = params[:id]
     page = PageModule.create_page_by_full_title(full_title)
     if page
-      GetInitialPageContent.run(page: page)
+      GenerateInitialPageContent.run(page: page)
       page.save
       redirect_to page_path(full_title) and return
     else
