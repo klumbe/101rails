@@ -148,8 +148,10 @@ class PagesController < ApplicationController
     full_title = params[:id]
     page = PageModule.create_page_by_full_title(full_title)
     if page
-      GenerateInitialPageContent.run(page: page)
-      page.save
+      if page.namespace != 'Template'
+        GenerateInitialPageContent.run(page: page)
+        page.save
+      end
       redirect_to page_path(full_title) and return
     else
       flash[:error] = "You cannot create new page #{full_title}"
