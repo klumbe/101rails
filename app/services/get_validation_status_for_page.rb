@@ -1,6 +1,8 @@
 class GetValidationStatusForPage
   include SolidUseCase
 
+  DEFAULT_TEMPLATE = 'Template:Default'
+
   steps(
     :create_validator,
     :fetch_templates,
@@ -45,14 +47,13 @@ class GetValidationStatusForPage
     templates = params[:templates]
     validator = params[:validator]
 
-    basic = 'Template:Basic'
     # select templates that inherit frome the pages namespace-template
     list = templates.select {|t| t.name.start_with?(namespace) }
     if list.empty?
       #  add the namespace template if it exists
       default_template = GetPage.run(full_title: "Template:#{namespace}").value[:page]
       if default_template.nil?
-        default_template = GetPage.run(full_title: basic).value[:page]
+        default_template = GetPage.run(full_title: DEFAULT_TEMPLATE).value[:page]
       end
       if !default_template.nil?
         default_template_dto = WikiValidator::PageDTO.new(default_template.title,
