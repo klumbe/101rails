@@ -4,7 +4,8 @@ class GetValidationStatusForPage
   steps(
     :create_validator,
     :fetch_templates,
-    :add_default_templates,
+    :fetch_default_templates,
+    :add_templates_to_validator,
     :validate_page
   )
 
@@ -39,7 +40,7 @@ class GetValidationStatusForPage
     continue(params)
   end
 
-  def add_default_templates(params)
+  def fetch_default_templates(params)
     namespace = params[:page].namespace
     templates = params[:templates]
     validator = params[:validator]
@@ -62,6 +63,12 @@ class GetValidationStatusForPage
       end
     end
 
+    continue(params)
+  end
+
+  def add_templates_to_validator(params)
+    validator = params[:validator]
+    templates = params[:templates]
     validator.add_templates(templates)
 
     continue(params)
