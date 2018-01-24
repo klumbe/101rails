@@ -102,7 +102,12 @@
 </div>
 
   <div id='sections'>
+    <% if page.namespace == 'Template' %>
+    This template consists of the following constraints:
+    <%= simple_format("<pre>\n#{page.raw_content}\n</pre>") %>
+    <% else %>
     <%= page.render.html_safe %>
+    <% end %>
 
     <% if (@rdf && @rdf.count > 0) || (@resources && @resources.count > 0) || (@books && @books.count > 0) %>
     <div class='section' id='metasection'>
