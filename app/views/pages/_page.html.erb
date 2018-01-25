@@ -96,22 +96,18 @@
      </div>
     <% end %>
 
-    <div id="<%= page_path(page.full_underscore_title) %>">
-      <span>
-        <h2 style="display: inline-block;">
-          <%= link_to("#{page.namespace}:", page_path("Namespace:#{page.namespace}")) %>
-        </h2>
-        <h1 style="display: inline-block;">
-          <%= page.title %>
-        </h1>
-      </span>
-    </div>
+    <%= render partial: 'headline', object: page, as: :page %>
 
   </div>
 </div>
 
   <div id='sections'>
+    <% if page.namespace == 'Template' %>
+    This template consists of the following constraints:
+    <%= simple_format("<pre>\n#{page.raw_content}\n</pre>") %>
+    <% else %>
     <%= page.render.html_safe %>
+    <% end %>
 
     <% if (@rdf && @rdf.count > 0) || (@resources && @resources.count > 0) || (@books && @books.count > 0) %>
     <div class='section' id='metasection'>

@@ -1,0 +1,19 @@
+#validation_accordion{
+  .panel-heading{
+    overflow: hidden;
+  }
+  .template_name, .validation_error_template_location, .validation_error_message{
+    float: left;
+  }
+  .template_status, .validation_error_location{
+    float: right;
+  }
+
+  .validation_error_template_location{
+    font-weight: bold;
+    border-right: 1px solid gray;
+    padding-right: 7px;
+    margin-right: 7px;
+  }
+
+}

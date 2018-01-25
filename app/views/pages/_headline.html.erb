@@ -1,0 +1,10 @@
+<div id="<%= page_path(page.full_underscore_title) %>">
+  <span>
+    <h2 style="display: inline-block;">
+      <%= link_to("#{page.namespace}:", page_path("Namespace:#{page.namespace}")) %>
+    </h2>
+    <h1 style="display: inline-block;">
+      <%= page.title %>
+    </h1>
+  </span>
+</div>

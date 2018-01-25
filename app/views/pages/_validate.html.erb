@@ -1,0 +1,36 @@
+<div class="panel-group" id="validation_accordion">
+  <% if @valid
+        panel_class = 'panel-success'
+     elsif @page.namespace == 'Template'
+        panel_class = 'panel-default'
+        template = true
+     else
+       panel_class = 'panel-danger'
+     end
+  %>
+  <div class="panel <%= panel_class %>">
+    <div class="panel-heading" id="validation_heading">
+      <h5 class="panel-title">
+        <a data-toggle="collapse" data-parent="#validation_accordion" href="#validation_status_list">
+          <% if template %>
+          Validation is turned off for templates.
+          <% else %>
+          <%= @valid ? 'The page is valid.' : 'Validation errors have been found.' %>
+          <% end %>
+        </a>
+      </h5>
+    </div>
+    <% unfold = @unfolded ? ' in' : '' %>
+    <div id="validation_status_list" class="panel-collapse collapse<%= unfold %>">
+      <div class="panel-body">
+        <% if @validation_status_list.empty? %>
+        No template has been applied.
+        <% else %>
+        <div class="panel-group" id="validation_status_accordion">
+          <%= render partial: 'validation_status', collection: @validation_status_list %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

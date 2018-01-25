@@ -9,7 +9,8 @@ class PagesController < ApplicationController
 
   # before_filter need to be before load_and_authorize_resource
   # methods, that need to check permissions
-  before_action :get_the_page, only: [:edit, :rename, :update, :update_repo, :destroy]
+  before_action :get_the_page, only: [:edit, :rename, :update, :update_repo, :destroy, :validate]
+  before_action :get_validation_result, only: [:validate]
   authorize_resource only: [:delete, :rename, :update, :apply_findings, :update_repo, :render_script]
 
   def get_the_page
@@ -59,6 +60,16 @@ class PagesController < ApplicationController
     end
 
     @books = []
+  end
+
+  def get_validation_result
+    if @page.nil? || @page.namespace == 'Template'
+      @validation_status_list = []
+      @valid = false
+    else
+      @validation_status_list = GetValidationStatusForPage.run(page: @page).value[:status]
+      @valid = ((@validation_status_list.select {|s| !s.valid?}.empty?) && !@validation_status_list.empty?)
+    end
   end
 
   def index
@@ -137,6 +148,10 @@ class PagesController < ApplicationController
     full_title = params[:id]
     page = PageModule.create_page_by_full_title(full_title)
     if page
+      if page.namespace != 'Template'
+        GenerateInitialPageContent.run(page: page)
+        page.save
+      end
       redirect_to page_path(full_title) and return
     else
       flash[:error] = "You cannot create new page #{full_title}"
@@ -197,6 +212,7 @@ class PagesController < ApplicationController
         @contributions  = result[:contributions]
         @errors         = result[:errors]
         @warnings       = result[:warnings]
+        get_validation_result()
       end
 
       failure(:page_not_found) do |result|
@@ -214,6 +230,21 @@ class PagesController < ApplicationController
 
       failure(:contributor_page_created) do |result|
         redirect_to page_path(result[:full_title])
+      end
+    end
+  end
+
+  # get :full_title/validate
+  def validate
+    # unfolds the top accordion-view
+    @unfolded = true
+
+    respond_to do |format|
+      format.html do
+        render :validation_report
+      end
+      format.json do
+        render json: @validation_status_list.to_json
       end
     end
   end

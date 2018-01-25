@@ -1,0 +1,4 @@
+<%= content_for :title, @page.full_title %>
+<%= render partial: 'headline', object: @page, as: :page %>
+<h2>Validation report</h2>
+<%= render 'validate' %>

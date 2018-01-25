@@ -80,7 +80,7 @@ class ShowPage
       similarities = page.similar(load: false)
       params[:similarities] = similarities.response['hits']['hits'].map { |item| {id: item['_id'], full_title: item['_source']['full_title'], score: item['_score']}  }
     else
-      params[:similarities] = []  
+      params[:similarities] = []
     end
 
     continue(params)
